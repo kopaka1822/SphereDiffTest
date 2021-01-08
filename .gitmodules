@@ -1,0 +1,6 @@
+[submodule "dependencies/script"]
+	path = dependencies/script
+	url = https://github.com/kopaka1822/CppScriptEngine.git
+[submodule "dependencies/gli"]
+	path = dependencies/gli
+	url = https://github.com/g-truc/gli.git

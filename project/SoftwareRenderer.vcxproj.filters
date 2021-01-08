@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\dependencies\glad\src\glad.c">
+      <Filter>dependencies</Filter>
+    </ClCompile>
+    <ClCompile Include="..\framework\Window.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\framework\Texture2D.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="App.cpp">
+      <Filter>visibility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\dependencies\AsyncInput.cpp">
+      <Filter>dependencies</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\framework\Timer.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\framework\Window.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\framework\glmmath.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\framework\error.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\framework\BufferBase.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\framework\IndexBuffer.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\framework\Program.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\framework\Shader.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\framework\Texture2D.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\framework\type_conversion.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\framework\Uniform.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\framework\VertexArrayObject.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\framework\VertexBuffer.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="App.h">
+      <Filter>visibility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\dependencies\AsyncInput.h">
+      <Filter>dependencies</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="framework">
+      <UniqueIdentifier>{b66ed61a-06b7-40b7-9a2b-a55125726767}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dependencies">
+      <UniqueIdentifier>{7754d37b-96ce-4ead-b799-9d2665c7fcc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="visibility">
+      <UniqueIdentifier>{0a4caea1-7b2f-4b64-8d48-fc1ba6581e25}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
