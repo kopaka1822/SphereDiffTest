@@ -17,6 +17,12 @@
     <ClCompile Include="..\dependencies\AsyncInput.cpp">
       <Filter>dependencies</Filter>
     </ClCompile>
+    <ClCompile Include="GBufferRenderer.cpp">
+      <Filter>visibility</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>visibility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\framework\Timer.h">
@@ -66,6 +72,18 @@
     </ClInclude>
     <ClInclude Include="..\framework\Pixels.h">
       <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="GBufferRenderer.h">
+      <Filter>visibility</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>visibility</Filter>
+    </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>visibility</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultRenderer.h">
+      <Filter>visibility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

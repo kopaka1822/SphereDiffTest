@@ -13,11 +13,33 @@ public:
 
 		m_pixels.resize(width * height);
 	}
+	Pixels() : m_width(0), m_height(0) {}
+	Pixels(const Pixels&) = delete;
+	Pixels& operator=(const Pixels&) = delete;
+	Pixels(Pixels&& o) noexcept  : Pixels()
+	{
+		swap(o);
+	}
+	Pixels& operator=(Pixels&& o) noexcept
+	{
+		swap(o);
+		return *this;
+	}
+	void swap(Pixels& o) noexcept
+	{
+		std::swap(o.m_width, m_width);
+		std::swap(o.m_height, m_height);
+		std::swap(o.m_pixels, m_pixels);
+	}
 	
 	int getWidth() const { return m_width; }
 	int getHeight() const { return m_height; }
 	const T* data() const { return m_pixels.data(); }
-
+	T* begin() { return m_pixels.data(); }
+	T* end() { return m_pixels.data() + m_pixels.size(); }
+	const T* begin() const { return m_pixels.data(); }
+	const T* end() const { return m_pixels.data() + m_pixels.size(); }
+	
 	void clear()
 	{
 		memset(m_pixels.data(), 0, m_pixels.size() * sizeof(T));

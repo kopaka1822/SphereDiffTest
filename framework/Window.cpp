@@ -116,6 +116,9 @@ void Window::handleEvents()
 void Window::swapBuffer(const Pixels<uint32_t>& pixels) const
 {
 #ifdef WINDOW_PUT_PIXEL
+	if (size_t(pixels.getWidth()) != m_width || size_t(pixels.getHeight()) != m_height)
+		throw std::runtime_error("Window::swapBuffer pixels dimension mismatch");
+	
 	// update texture data
 	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, GLsizei(m_width), GLsizei(m_height), GL_RGB, GL_UNSIGNED_BYTE, pixels.data());
 	
@@ -183,9 +186,6 @@ void Window::resize(size_t width, size_t height)
 
 	glViewport(0, 0, static_cast<GLsizei>(width), static_cast<GLsizei>(height));
 
-#ifdef WINDOW_PUT_PIXEL
-	m_pixels.resize(width * height * 3);
-
 	// generate texture with window size
 	if (m_texture)
 		glDeleteTextures(1, &m_texture);
@@ -196,7 +196,6 @@ void Window::resize(size_t width, size_t height)
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, GLsizei(m_width), GLsizei(m_height), 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-#endif
 
 	if (m_onSizeChange)
 		m_onSizeChange(int(m_width), int(m_height));

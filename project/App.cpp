@@ -18,7 +18,6 @@ bool App::run()
 {
 	m_wnd.handleEvents();
 
-	m_wnd.clear();
 	m_wnd.swapBuffer();
 
 	return m_wnd.isOpen();
