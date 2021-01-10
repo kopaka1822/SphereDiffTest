@@ -145,6 +145,7 @@
     <ClInclude Include="..\framework\error.h" />
     <ClInclude Include="..\framework\glmmath.h" />
     <ClInclude Include="..\framework\IndexBuffer.h" />
+    <ClInclude Include="..\framework\Pixels.h" />
     <ClInclude Include="..\framework\Program.h" />
     <ClInclude Include="..\framework\Shader.h" />
     <ClInclude Include="..\framework\Texture2D.h" />

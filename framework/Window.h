@@ -8,6 +8,8 @@
 #include "Program.h"
 #include <memory>
 
+#include "Pixels.h"
+
 // windows likes to define some stuff
 #undef min
 #undef max
@@ -168,22 +170,8 @@ public:
 	void handleEvents();
 
 	/// \brief uploads pixel data to gpu
-	void swapBuffer() const;
-
-#ifdef WINDOW_PUT_PIXEL
-
-	/// \brief puts a pixel in the back buffer (will be visible after swapBuffer())
-	/// \param x pixel coordinate
-	/// \param y pixel coordinate
-	/// \param r red value [0,1]
-	/// \param g green value [0,1]
-	/// \param b blue value [0,1]
-	void putPixel(int x, int y, float r, float g, float b);
-
-	/// \brief sets all pixels to black
-	void clear();
-
-#endif
+	void swapBuffer(const Pixels<uint32_t>& pixels) const;
+	
 	/// \return window client width in pixels
 	size_t getWidth() const { return m_width; }
 
@@ -235,14 +223,6 @@ public:
 private:
 
 #ifdef WINDOW_PUT_PIXEL
-	/// \brief puts a pixel in the back buffer (will be visible after swapBuffer())
-	/// \param x pixel coordinate
-	/// \param y pixel coordinate
-	/// \param r color for the pixel (red)
-	/// \param g color for the pixel (green)
-	/// \param b color for the pixel (blue)
-	void putPixel(int x, int y, uint8_t r, uint8_t g, uint8_t b);
-
 	/// \brief converts floating point color into a uint32
 	/// \return converted color
 	static uint8_t convertToBits(float r);
@@ -256,13 +236,10 @@ private:
 	bool m_open = true;
 	size_t m_width = 0;
 	size_t m_height = 0;
-
-#ifdef WINDOW_PUT_PIXEL
-	std::vector<uint8_t> m_pixels;
+	
 	std::unique_ptr<Program> m_program;
 	uint32_t m_vao = 0;
 	uint32_t m_texture = 0;
-#endif
 
 	size_t m_mouseX = 0;
 	size_t m_mouseY = 0;

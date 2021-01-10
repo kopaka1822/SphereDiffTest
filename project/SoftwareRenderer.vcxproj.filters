@@ -64,6 +64,9 @@
     <ClInclude Include="..\dependencies\AsyncInput.h">
       <Filter>dependencies</Filter>
     </ClInclude>
+    <ClInclude Include="..\framework\Pixels.h">
+      <Filter>framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="framework">

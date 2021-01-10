@@ -113,35 +113,17 @@ void Window::handleEvents()
 	m_open = !glfwWindowShouldClose(m_handle);
 }
 
-void Window::swapBuffer() const
+void Window::swapBuffer(const Pixels<uint32_t>& pixels) const
 {
 #ifdef WINDOW_PUT_PIXEL
 	// update texture data
-	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, GLsizei(m_width), GLsizei(m_height), GL_RGB, GL_UNSIGNED_BYTE, m_pixels.data());
+	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, GLsizei(m_width), GLsizei(m_height), GL_RGB, GL_UNSIGNED_BYTE, pixels.data());
 	
 	// draw screenfilling quad
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 #endif
 	glfwSwapBuffers(m_handle);
-}
-
-#ifdef WINDOW_PUT_PIXEL
-
-void Window::putPixel(int x, int y, uint8_t r, uint8_t g, uint8_t b)
-{
-	dassert(x >= 0);
-	dassert(y >= 0);
-	dassert(x < int(m_width));
-	dassert(y < int(m_height));
-	m_pixels[(y * m_width + x) * 3 + 0] = r;
-	m_pixels[(y * m_width + x) * 3 + 1] = g;
-	m_pixels[(y * m_width + x) * 3 + 2] = b;
-}
-
-void Window::putPixel(int x, int y, float r, float g, float b)
-{
-	putPixel(x, y, convertToBits(r), convertToBits(g), convertToBits(b));
 }
 
 void Window::initShader()
@@ -176,16 +158,10 @@ void Window::initShader()
 	glBindVertexArray(m_vao);
 }
 
-void Window::clear()
-{
-	memset(m_pixels.data(), 0, m_pixels.size() * sizeof(m_pixels[0]));
-}
-
 uint8_t Window::convertToBits(float r)
 {
 	return uint8_t(255.0f * glm::clamp(r, 0.0f, 1.0f));
 }
-#endif
 
 void Window::setTitle(const std::string& title)
 {
