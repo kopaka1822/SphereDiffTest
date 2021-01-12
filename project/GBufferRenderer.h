@@ -1,26 +1,20 @@
 #pragma once
 #include <variant>
-
-
 #include "Camera.h"
 #include "../framework/Timer.h"
 #include "../framework/Window.h"
 #include "Ray.h"
+#include "Scene.h"
+#include "Sphere.h"
 
 struct MissData
 {
 	
 };
 
-struct SphereData
-{
-	glm::vec3 center;
-	float radius;
-};
-
 struct GBuffer
 {
-	std::variant<MissData, SphereData> hit;
+	std::variant<MissData, Sphere> hit;
 	RayData ray;
 };
 
@@ -35,4 +29,5 @@ private:
 	Window& m_wnd;
 	Camera m_cam;
 	Timer m_timer;
+	Scene m_scene;
 };

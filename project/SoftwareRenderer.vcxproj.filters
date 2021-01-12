@@ -20,11 +20,14 @@
     <ClCompile Include="GBufferRenderer.cpp">
       <Filter>visibility</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>visibility</Filter>
-    </ClCompile>
     <ClCompile Include="AttributeRenderer.cpp">
       <Filter>visibility</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>visibility\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>visibility\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -79,17 +82,23 @@
     <ClInclude Include="GBufferRenderer.h">
       <Filter>visibility</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>visibility</Filter>
-    </ClInclude>
-    <ClInclude Include="Ray.h">
-      <Filter>visibility</Filter>
-    </ClInclude>
     <ClInclude Include="DefaultRenderer.h">
       <Filter>visibility</Filter>
     </ClInclude>
     <ClInclude Include="AttributeRenderer.h">
       <Filter>visibility</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>visibility\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>visibility\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>visibility\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>visibility\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +110,9 @@
     </Filter>
     <Filter Include="visibility">
       <UniqueIdentifier>{0a4caea1-7b2f-4b64-8d48-fc1ba6581e25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="visibility\Scene">
+      <UniqueIdentifier>{00d7364f-543f-4a98-b925-bc6620a631f0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

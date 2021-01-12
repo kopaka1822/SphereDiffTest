@@ -38,9 +38,14 @@ void GBufferRenderer::render()
 		{
 			// generate ray
 			ray = m_cam.computeRayPinhole(x, y, m_pixels.getWidth(), m_pixels.getHeight());
-
+			auto isect =  m_scene.TraceRay(ray);
+			
 			GBuffer res;
 			res.ray = ray;
+			if(isect.has_value())
+			{
+				res.hit = isect.value();
+			}
 			
 			
 			*curPixel = res;
