@@ -2,12 +2,11 @@
 
 using namespace glm;
 
-Camera::Camera(float aspect, const glm::vec3& position)
+Camera::Camera(const glm::vec3& position)
 	:
-m_position(position)
-{
-	setAspect(aspect);
-}
+m_position(position),
+m_direction(0.0, 0.0f, 1.0f)
+{}
 
 void Camera::onKey(Window::Key k, bool down)
 {

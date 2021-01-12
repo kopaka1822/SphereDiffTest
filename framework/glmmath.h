@@ -1,6 +1,11 @@
 #pragma once
 // essential includes to use glm
 
+#ifndef GLM_FORCE_LEFT_HANDED
+#define GLM_FORCE_LEFT_HANDED
+#endif
+#define GLM_GTC_matrix_transform
+
 // vectors
 #include <glm/vec4.hpp>
 // matrices

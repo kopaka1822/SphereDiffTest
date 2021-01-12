@@ -170,7 +170,7 @@ public:
 	void handleEvents();
 
 	/// \brief uploads pixel data to gpu
-	void swapBuffer(const Pixels<uint32_t>& pixels) const;
+	void swapBuffer(const Pixels<glm::vec3>& pixels) const;
 	
 	/// \return window client width in pixels
 	size_t getWidth() const { return m_width; }

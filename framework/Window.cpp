@@ -113,14 +113,14 @@ void Window::handleEvents()
 	m_open = !glfwWindowShouldClose(m_handle);
 }
 
-void Window::swapBuffer(const Pixels<uint32_t>& pixels) const
+void Window::swapBuffer(const Pixels<glm::vec3>& pixels) const
 {
 #ifdef WINDOW_PUT_PIXEL
 	if (size_t(pixels.getWidth()) != m_width || size_t(pixels.getHeight()) != m_height)
 		throw std::runtime_error("Window::swapBuffer pixels dimension mismatch");
 	
 	// update texture data
-	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, GLsizei(m_width), GLsizei(m_height), GL_RGB, GL_UNSIGNED_BYTE, pixels.data());
+	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, GLsizei(m_width), GLsizei(m_height), GL_RGB, GL_FLOAT, pixels.data());
 	
 	// draw screenfilling quad
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);

@@ -6,12 +6,11 @@
 class Camera
 {
 public:
-	Camera(float aspect, const glm::vec3& position);
+	Camera(const glm::vec3& position);
 	void onKey(Window::Key, bool down);
 
 	const glm::mat4& getView() const { return m_view; }
 	const glm::vec3& getPosition() const { return m_position; }
-	void setAspect(float aspect);
 
 	void update(float dt);
 	
@@ -35,7 +34,7 @@ private:
 		glm::vec2 ndc = glm::vec2(2, -2) * p + glm::vec2(-1, 1); // [-1, 1]
 
 		// Compute the non-normalized ray direction assuming a pinhole camera.
-		return ndc.x * m_view[0] + ndc.y * m_view[1] + m_view[2];
+		return ndc.x * m_view[0] - ndc.y * m_view[1] + m_view[2];
 	}
 	
 	glm::mat4 m_view;

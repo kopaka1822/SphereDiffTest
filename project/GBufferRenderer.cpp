@@ -3,7 +3,7 @@
 GBufferRenderer::GBufferRenderer(Window& window)
 	:
 m_wnd(window),
-m_cam(1.0f, glm::vec3(0.0f))
+m_cam(glm::vec3(0.0f))
 {
 	m_wnd.setKeyDownCallback([this](Window::Key key)
 	{
@@ -21,7 +21,6 @@ void GBufferRenderer::render()
 	if(size_t(m_pixels.getWidth()) != m_wnd.getWidth() || size_t(m_pixels.getHeight()) != m_wnd.getHeight())
 	{
 		m_pixels = Pixels<GBuffer>(int(m_wnd.getWidth()), int(m_wnd.getHeight()));
-		m_cam.setAspect(float(m_wnd.getWidth()) / float(m_wnd.getHeight()));
 		m_timer.start();
 	}
 

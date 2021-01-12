@@ -137,6 +137,7 @@
     <ClCompile Include="..\framework\Texture2D.cpp" />
     <ClCompile Include="..\framework\Window.cpp" />
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="AttributeRenderer.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GBufferRenderer.cpp" />
     <ClCompile Include="main.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="..\framework\VertexBuffer.h" />
     <ClInclude Include="..\framework\Window.h" />
     <ClInclude Include="App.h" />
+    <ClInclude Include="AttributeRenderer.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DefaultRenderer.h" />
     <ClInclude Include="GBufferRenderer.h" />

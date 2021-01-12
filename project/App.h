@@ -1,6 +1,12 @@
 #pragma once
+#include <optional>
+
 #include "../framework/Window.h"
 #include <script/ScriptEngine.h>
+
+
+#include "AttributeRenderer.h"
+#include "GBufferRenderer.h"
 
 class App final : public script::ScriptObject
 {
@@ -14,5 +20,6 @@ public:
 	void close();
 private:
 	Window m_wnd;
-
+	std::optional<GBufferRenderer> m_gbuffer;
+	AttributeRenderer m_attribRenderer;
 };
