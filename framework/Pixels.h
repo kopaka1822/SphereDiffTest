@@ -39,6 +39,14 @@ public:
 	T* end() { return m_pixels.data() + m_pixels.size(); }
 	const T* begin() const { return m_pixels.data(); }
 	const T* end() const { return m_pixels.data() + m_pixels.size(); }
+
+	T get(int x, int y) const
+	{
+		if (m_width == 0 || m_height == 0) return T(0);
+		x = glm::clamp(x, 0, m_width - 1);
+		y = glm::clamp(y, 0, m_height - 1);
+		return m_pixels[y * m_width + x];
+	}
 	
 	void clear()
 	{

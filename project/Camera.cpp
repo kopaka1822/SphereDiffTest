@@ -70,11 +70,11 @@ void Camera::drag(float dx, float dy)
 	
 	// rotate direction
 	const auto id = glm::mat4(1.0f);
-	const auto down = glm::vec3(0.0f, -1.0f, 0.0f);
-	const auto side = glm::normalize(cross(m_direction, down));
+	const auto up = glm::vec3(0.0f, 1.0f, 0.0f);
+	const auto side = glm::normalize(cross(m_direction, up));
 
-	auto v = glm::rotate(id, float(dy) * speed, side) * glm::vec4(m_direction, 0.0f);
-	v = glm::rotate(id, float(dx) * speed, down) * v;
+	auto v = glm::rotate(id, float(-dy) * speed, side) * glm::vec4(m_direction, 0.0f);
+	v = glm::rotate(id, float(-dx) * speed, up) * v;
 	m_direction = glm::normalize(v);
 }
 

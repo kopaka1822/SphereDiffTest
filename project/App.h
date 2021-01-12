@@ -19,6 +19,7 @@ public:
 	bool run();
 	void close();
 private:
+	void updateTitle(glm::vec3 color);
 	Window m_wnd;
 	std::optional<GBufferRenderer> m_gbuffer;
 	AttributeRenderer m_attribRenderer;

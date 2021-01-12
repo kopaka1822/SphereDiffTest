@@ -23,5 +23,5 @@ public:
 	void setAttribute(Attribute a) { m_attrib = a; }
 private:
 	Pixels<glm::vec3> m_pixels;
-	Attribute m_attrib = Attribute::Position;
+	Attribute m_attrib = Attribute::Normal;
 };

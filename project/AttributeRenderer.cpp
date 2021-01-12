@@ -22,9 +22,22 @@ void AttributeRenderer::update(const Pixels<GBuffer>& src)
 			
 			break;
 
-		case 1: // sphere
-			*d = glm::vec3(s->ray.t);
-			break;
+		case 1: { // sphere
+			auto sphere = std::get<1>(s->hit);
+			switch (m_attrib)
+			{
+			case Attribute::Depth:
+				*d = glm::vec3(s->ray.t);
+				break;
+			case Attribute::Position:
+				*d = s->ray.origin + s->ray.t * s->ray.direction;
+				break;
+			case Attribute::Normal:
+				*d = (s->ray.origin + s->ray.t * s->ray.direction - sphere.C) / sphere.r;
+				break;
+			}
+
+		} break;
 		}
 		//*d = glm::vec3(s->ray.direction.y * 0.5 + 0.5); //* 0.5f + glm::vec3(0.5f);
 
@@ -41,6 +54,6 @@ void AttributeRenderer::update(const Pixels<GBuffer>& src)
 
 	for(auto& p : m_pixels)
 	{
-		p = (p - offset) * scale;
+		//p = (p - offset) * scale;
 	}
 }
