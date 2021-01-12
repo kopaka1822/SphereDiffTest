@@ -30,4 +30,5 @@ private:
 	Camera m_cam;
 	Timer m_timer;
 	Scene m_scene;
+	bool m_mouseDown = false;
 };

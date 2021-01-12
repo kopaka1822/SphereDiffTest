@@ -13,6 +13,24 @@ m_cam(glm::vec3(0.0f))
 	{
 		m_cam.onKey(key, false);
 	});
+	m_wnd.setMouseDownCallback([this](Window::Button btn, float x, float y)
+	{
+		if(btn == Window::LEFT)
+		{
+			m_mouseDown = true;
+		}
+	});
+	m_wnd.setMouseUpCallback([this](Window::Button btn, float x, float y)
+	{
+		if(btn == Window::LEFT)
+		{
+			m_mouseDown = false;
+		}
+	});
+	m_wnd.setMouseMoveCallback([this](float x, float y, float dx, float dy)
+	{
+		if (m_mouseDown) m_cam.drag(dx, dy);
+	});
 }
 
 void GBufferRenderer::render()
@@ -21,6 +39,7 @@ void GBufferRenderer::render()
 	if(size_t(m_pixels.getWidth()) != m_wnd.getWidth() || size_t(m_pixels.getHeight()) != m_wnd.getHeight())
 	{
 		m_pixels = Pixels<GBuffer>(int(m_wnd.getWidth()), int(m_wnd.getHeight()));
+		m_cam.setAspect(float(m_wnd.getWidth()) / float(m_wnd.getHeight()));
 		m_timer.start();
 	}
 

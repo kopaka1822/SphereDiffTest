@@ -29,6 +29,7 @@ public:
 		BUTTON6 = GLFW_MOUSE_BUTTON_6,
 		BUTTON7 = GLFW_MOUSE_BUTTON_7,
 		BUTTON8 = GLFW_MOUSE_BUTTON_8,
+		SIZE
 	};
 
 	enum class Key
@@ -153,7 +154,8 @@ public:
 		RIGHT_CONTROL = GLFW_KEY_RIGHT_CONTROL,
 		RIGHT_ALT = GLFW_KEY_RIGHT_ALT,
 		RIGHT_SUPER = GLFW_KEY_RIGHT_SUPER,
-		MENU = GLFW_KEY_MENU
+		MENU = GLFW_KEY_MENU,
+		SIZE
 	};
 public:
 	/// \brief creates a new window
