@@ -42,7 +42,7 @@ void Camera::onKey(Window::Key k, bool down)
 void Camera::update(float dt)
 {
 	// update view for tangent space of movement
-	m_view = lookAt(m_position, m_position + m_direction, vec3(0.0f, 1.0f, 0.0f));
+	m_view = glm::transpose(lookAt(m_position, m_position + m_direction, vec3(0.0f, 1.0f, 0.0f)));
 
 	float speed = m_speed * m_baseSpeed * dt;
 	if (m_forwardDown)
@@ -61,7 +61,7 @@ void Camera::update(float dt)
 		m_position += glm::vec3(m_view[1]) * speed;
 
 	// final view
-	m_view = lookAt(m_position, m_position + m_direction, vec3(0.0f, 1.0f, 0.0f));
+	m_view = glm::transpose(lookAt(m_position, m_position + m_direction, vec3(0.0f, 1.0f, 0.0f)));
 }
 
 void Camera::drag(float dx, float dy)
@@ -73,8 +73,8 @@ void Camera::drag(float dx, float dy)
 	const auto up = glm::vec3(0.0f, 1.0f, 0.0f);
 	const auto side = glm::normalize(cross(m_direction, up));
 
-	auto v = glm::rotate(id, float(-dy) * speed, side) * glm::vec4(m_direction, 0.0f);
-	v = glm::rotate(id, float(-dx) * speed, up) * v;
+	auto v = glm::rotate(id, float(dy) * speed, side) * glm::vec4(m_direction, 0.0f);
+	v = glm::rotate(id, float(dx) * speed, up) * v;
 	m_direction = glm::normalize(v);
 }
 
@@ -85,6 +85,7 @@ glm::vec3 Camera::computeNonNormalizedRayDirPinhole(glm::ivec2 pixel, glm::ivec2
 	glm::vec2 p = (glm::vec2(pixel) + glm::vec2(0.5f, 0.5f)) / glm::vec2(frameDim); // [0, 1]
 	glm::vec2 ndc = glm::vec2(2, 2) * p - glm::vec2(1, 1); // [-1, 1]
 
+	float tanHalfFovy = tan(glm::radians(45.0f) * 0.5f);
 	// Compute the non-normalized ray direction assuming a pinhole camera.
-	return ndc.x * m_view[0] * m_aspect + ndc.y * m_view[1] + m_view[2];
+	return ndc.x * m_view[0] * m_aspect * tanHalfFovy + ndc.y * m_view[1] * tanHalfFovy + m_view[2];
 }

@@ -10,7 +10,10 @@ Scene::Scene()
 	Sphere s;
 	s.C = glm::vec3(0.0f, 0.0f, 3.0f);
 	s.r = 1.0f;
-	
+	m_spheres.push_back(s);
+
+	s.C = glm::vec3(0.0f, -3.0f, 3.0f);
+	s.r = 2.0f;
 	m_spheres.push_back(s);
 }
 
