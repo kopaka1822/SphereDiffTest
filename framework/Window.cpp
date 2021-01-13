@@ -15,8 +15,8 @@ static void errorCallbackGLFW(int error, const char* description)
 
 Window::Window(size_t width, size_t height, const std::string& title)
 	:
-	m_width(width),
-	m_height(height)
+	m_width(width * m_resScale),
+	m_height(height * m_resScale)
 {
 	if (s_window)
 		throw std::runtime_error("Only one instance of Window should be open to work properly");
@@ -35,7 +35,7 @@ Window::Window(size_t width, size_t height, const std::string& title)
 	glfwWindowHint(GLFW_STENCIL_BITS, 0);
 	
 
-	m_handle = glfwCreateWindow(static_cast<int>(width), static_cast<int>(height), title.c_str(), nullptr, nullptr);
+	m_handle = glfwCreateWindow(static_cast<int>(m_width), static_cast<int>(m_height), title.c_str(), nullptr, nullptr);
 	if (!m_handle) throw std::runtime_error("Window creation failed!");
 	glfwMakeContextCurrent(m_handle);
 	glfwSetWindowSizeLimits(m_handle, 100, 100, GLFW_DONT_CARE, GLFW_DONT_CARE);
@@ -96,7 +96,7 @@ Window::Window(size_t width, size_t height, const std::string& title)
 	initShader();
 #endif
 
-	resize(width, height);
+	resize(m_width, m_height);
 }
 
 Window::~Window()
@@ -116,11 +116,11 @@ void Window::handleEvents()
 void Window::swapBuffer(const Pixels<glm::vec3>& pixels) const
 {
 #ifdef WINDOW_PUT_PIXEL
-	if (size_t(pixels.getWidth()) != m_width || size_t(pixels.getHeight()) != m_height)
+	if (size_t(pixels.getWidth()) != getWidth() || size_t(pixels.getHeight()) != getHeight())
 		throw std::runtime_error("Window::swapBuffer pixels dimension mismatch");
 	
 	// update texture data
-	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, GLsizei(m_width), GLsizei(m_height), GL_RGB, GL_FLOAT, pixels.data());
+	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, GLsizei(getWidth()), GLsizei(getHeight()), GL_RGB, GL_FLOAT, pixels.data());
 	
 	// draw screenfilling quad
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
@@ -149,8 +149,9 @@ void Window::initShader()
 		uniform sampler2D tex;
 		out vec4 fragColor;
 		void main() {
-			fragColor = texelFetch(tex, ivec2(gl_FragCoord.xy), 0);
+			fragColor = texelFetch(tex, ivec2(gl_FragCoord.xy) / 8, 0);
 	})");
+	assert(m_resScale == 8); // change value in shader if false!
 
 	m_program = std::make_unique<Program>();
 	m_program->attach(vertex).attach(fragment).link();
@@ -159,11 +160,6 @@ void Window::initShader()
 	// generate empty vertex array object (to use glDrawArrays)
 	glGenVertexArrays(1, &m_vao);
 	glBindVertexArray(m_vao);
-}
-
-uint8_t Window::convertToBits(float r)
-{
-	return uint8_t(255.0f * glm::clamp(r, 0.0f, 1.0f));
 }
 
 void Window::setTitle(const std::string& title)
@@ -193,10 +189,10 @@ void Window::resize(size_t width, size_t height)
 	glGenTextures(1, &m_texture);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 	
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, GLsizei(m_width), GLsizei(m_height), 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, GLsizei(getWidth()), GLsizei(getHeight()), 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 	if (m_onSizeChange)
-		m_onSizeChange(int(m_width), int(m_height));
+		m_onSizeChange(int(getWidth()), int(getHeight()));
 }

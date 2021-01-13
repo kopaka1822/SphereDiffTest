@@ -3,7 +3,7 @@
 
 App::App()
 	:
-	m_wnd(720, 480, "RayDiff Tool")
+	m_wnd(160, 90, "RayDiff Tool")
 {
 	addFunction("close", script::Util::makeFunction(this, &App::close, "App::close()"));
 

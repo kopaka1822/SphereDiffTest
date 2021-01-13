@@ -175,22 +175,22 @@ public:
 	void swapBuffer(const Pixels<glm::vec3>& pixels) const;
 	
 	/// \return window client width in pixels
-	size_t getWidth() const { return m_width; }
+	size_t getWidth() const { return m_width / m_resScale; }
 
 	/// \return window client height in pixels
-	size_t getHeight() const { return m_height; }
+	size_t getHeight() const { return m_height / m_resScale; }
 
 	/// \return mouse coordinate in pixels
-	size_t getMouseX() const { return std::min(m_width - 1, m_mouseX); }
+	size_t getMouseX() const { return std::min(m_width - 1, m_mouseX) / m_resScale; }
 	
 	/// \return mouse coordinate in pixels
-	size_t getMouseY() const { return std::min(m_height - 1, m_mouseY); }
+	size_t getMouseY() const { return std::min(m_height - 1, m_mouseY) / m_resScale; }
 	
 	/// \return mouse coordinate between [-1,1]
-	float getMouseXNorm() const { return float(getMouseX()) / (getWidth() - 1) * 2.0f - 1.0f; }
+	float getMouseXNorm() const { return float(std::min(m_width - 1, m_mouseX)) / (m_width - 1) * 2.0f - 1.0f; }
 	
 	/// \return mouse coordinate between [-1,1]
-	float getMouseYNorm() const { return float(getMouseY()) / (getHeight() - 1) * 2.0f - 1.0f; }
+	float getMouseYNorm() const { return float(std::min(m_height - 1, m_mouseY)) / (m_height - 1) * 2.0f - 1.0f; }
 
 	/// \brief sets callback for mouse button up events
 	/// \param cb callback Button = mouse button, first float = mouse x [-1,1], second float = mouse y [-1,1]
@@ -225,10 +225,6 @@ public:
 private:
 
 #ifdef WINDOW_PUT_PIXEL
-	/// \brief converts floating point color into a uint32
-	/// \return converted color
-	static uint8_t convertToBits(float r);
-
 	void initShader();
 #endif
 
@@ -236,7 +232,7 @@ private:
 private:
 	struct GLFWwindow* m_handle = nullptr;
 	bool m_open = true;
-	size_t m_width = 0;
+	size_t m_width = 0; // actual width
 	size_t m_height = 0;
 	
 	std::unique_ptr<Program> m_program;
@@ -245,6 +241,7 @@ private:
 
 	size_t m_mouseX = 0;
 	size_t m_mouseY = 0;
+	static const int m_resScale = 8; // scale from internal resolution to actual resolution
 
 	std::function<void(Key)> m_onKeyDown;
 	std::function<void(Key)> m_onKeyUp;
