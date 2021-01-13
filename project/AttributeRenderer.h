@@ -7,9 +7,6 @@ enum class Attribute
 	Position,
 	Normal,
 	Texcoord,
-	PositionDiff,
-	NormalDiff,
-	TexcoordDiff,
 };
 
 class AttributeRenderer
@@ -23,5 +20,5 @@ public:
 	void setAttribute(Attribute a) { m_attrib = a; }
 private:
 	Pixels<glm::vec3> m_pixels;
-	Attribute m_attrib = Attribute::Normal;
+	Attribute m_attrib = Attribute::Texcoord;
 };

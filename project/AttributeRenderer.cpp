@@ -35,6 +35,13 @@ void AttributeRenderer::update(const Pixels<GBuffer>& src)
 			case Attribute::Normal:
 				*d = (s->ray.origin + s->ray.t * s->ray.direction - sphere.C) / sphere.r;
 				break;
+			case Attribute::Texcoord: {
+				auto n = (s->ray.origin + s->ray.t * s->ray.direction - sphere.C) / sphere.r;
+				auto uv = sphere.calcUV(n);
+				d->x = uv[0];
+				d->y = uv[1];
+				d->z = 0.0f;
+			} break;
 			}
 
 		} break;
