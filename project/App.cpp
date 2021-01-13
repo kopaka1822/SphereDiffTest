@@ -3,7 +3,8 @@
 
 App::App()
 	:
-	m_wnd(160, 90, "RayDiff Tool")
+	m_wnd(160, 90, "RayDiff Tool"),
+	m_attrib(Attribute::Depth)
 {
 	addFunction("close", script::Util::makeFunction(this, &App::close, "App::close()"));
 
@@ -22,7 +23,7 @@ bool App::run()
 	m_wnd.handleEvents();
 
 	m_gbuffer->render();
-	m_attribRenderer.update(m_gbuffer->getPixels());
+	m_attribRenderer.update(m_gbuffer->getPixels(), m_attrib);
 
 	const auto& pixels = m_attribRenderer.getPixels();
 	m_wnd.swapBuffer(pixels);

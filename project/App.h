@@ -7,6 +7,7 @@
 
 #include "AttributeRenderer.h"
 #include "GBufferRenderer.h"
+#include "RealDiffRenderer.h"
 
 class App final : public script::ScriptObject
 {
@@ -15,6 +16,9 @@ public:
 
 	static App& get();
 
+	Attribute getAttribute() const { return m_attrib; }
+	void setAttribute(Attribute a) { m_attrib = a; }
+	
 	// returns true as long as the application should be executed
 	bool run();
 	void close();
@@ -23,4 +27,6 @@ private:
 	Window m_wnd;
 	std::optional<GBufferRenderer> m_gbuffer;
 	AttributeRenderer m_attribRenderer;
+	RealDiffRenderer m_refDiff;
+	Attribute m_attrib;
 };

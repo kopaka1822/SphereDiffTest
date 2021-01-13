@@ -1,6 +1,6 @@
 #include "AttributeRenderer.h"
 
-void AttributeRenderer::update(const Pixels<GBuffer>& src)
+void AttributeRenderer::update(const Pixels<GBuffer>& src, Attribute attrib)
 {
 	if(src.getWidth() != m_pixels.getWidth() || src.getHeight() != m_pixels.getHeight())
 	{
@@ -24,7 +24,7 @@ void AttributeRenderer::update(const Pixels<GBuffer>& src)
 
 		case 1: { // sphere
 			auto sphere = std::get<1>(s->hit);
-			switch (m_attrib)
+			switch (attrib)
 			{
 			case Attribute::Depth:
 				*d = glm::vec3(s->ray.t);

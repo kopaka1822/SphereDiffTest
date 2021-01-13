@@ -17,17 +17,23 @@
     <ClCompile Include="..\dependencies\AsyncInput.cpp">
       <Filter>dependencies</Filter>
     </ClCompile>
-    <ClCompile Include="GBufferRenderer.cpp">
-      <Filter>visibility</Filter>
-    </ClCompile>
-    <ClCompile Include="AttributeRenderer.cpp">
-      <Filter>visibility</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>visibility\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>visibility\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="AttributeRenderer.cpp">
+      <Filter>visibility\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="GBufferRenderer.cpp">
+      <Filter>visibility\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="RayDiffRenderer.cpp">
+      <Filter>visibility\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="RealDiffRenderer.cpp">
+      <Filter>visibility\renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -79,15 +85,6 @@
     <ClInclude Include="..\framework\Pixels.h">
       <Filter>framework</Filter>
     </ClInclude>
-    <ClInclude Include="GBufferRenderer.h">
-      <Filter>visibility</Filter>
-    </ClInclude>
-    <ClInclude Include="DefaultRenderer.h">
-      <Filter>visibility</Filter>
-    </ClInclude>
-    <ClInclude Include="AttributeRenderer.h">
-      <Filter>visibility</Filter>
-    </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>visibility\Scene</Filter>
     </ClInclude>
@@ -99,6 +96,24 @@
     </ClInclude>
     <ClInclude Include="Sphere.h">
       <Filter>visibility\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="AttributeRenderer.h">
+      <Filter>visibility\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="GBufferRenderer.h">
+      <Filter>visibility\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="RayDiffRenderer.h">
+      <Filter>visibility\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderAttributes.h">
+      <Filter>visibility\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="RealDiffRenderer.h">
+      <Filter>visibility\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Scissor.h">
+      <Filter>visibility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +128,9 @@
     </Filter>
     <Filter Include="visibility\Scene">
       <UniqueIdentifier>{00d7364f-543f-4a98-b925-bc6620a631f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="visibility\renderer">
+      <UniqueIdentifier>{3a848e5f-f8a2-456f-b18f-48caa0bfb03c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

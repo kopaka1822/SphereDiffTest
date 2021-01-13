@@ -141,6 +141,8 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GBufferRenderer.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RayDiffRenderer.cpp" />
+    <ClCompile Include="RealDiffRenderer.cpp" />
     <ClCompile Include="Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -162,10 +164,13 @@
     <ClInclude Include="App.h" />
     <ClInclude Include="AttributeRenderer.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="DefaultRenderer.h" />
     <ClInclude Include="GBufferRenderer.h" />
     <ClInclude Include="Ray.h" />
+    <ClInclude Include="RayDiffRenderer.h" />
+    <ClInclude Include="RealDiffRenderer.h" />
+    <ClInclude Include="RenderAttributes.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="Scissor.h" />
     <ClInclude Include="Sphere.h" />
   </ItemGroup>
   <ItemGroup>

@@ -47,6 +47,13 @@ public:
 		y = glm::clamp(y, 0, m_height - 1);
 		return m_pixels[y * m_width + x];
 	}
+
+	void set(T val, int x, int y)
+	{
+		assert(x >= 0); assert(x < m_width);
+		assert(y >= 0); assert(y < m_height);
+		m_pixels[y * m_width + x] = val;
+	}
 	
 	void clear()
 	{
