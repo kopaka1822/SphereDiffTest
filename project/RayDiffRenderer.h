@@ -1,18 +1,11 @@
 #pragma once
 #include "GBufferRenderer.h"
 #include "RenderAttributes.h"
+#include "Scissor.h"
 
 class RayDiffRenderer
 {
 public:
 	RayDiffRenderer() = default;
-	void update(const Pixels<GBuffer>& src);
-
-	const Pixels<glm::vec3>& getPixels() const { return m_pixels; }
-	Attribute getAttribute() const { return m_attrib; }
-	void setAttribute(Attribute a) { m_attrib = a; }
-private:
-	Pixels<glm::vec3> m_pixels;
-	Attribute m_attrib = Attribute::Position;
-	
+	void update(const Pixels<GBuffer>& gbuffer, const Pixels<glm::vec3>& src, Pixels<glm::vec3>& dst, Scissor s, Attribute attrib);
 };

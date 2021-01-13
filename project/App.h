@@ -7,6 +7,7 @@
 
 #include "AttributeRenderer.h"
 #include "GBufferRenderer.h"
+#include "RayDiffRenderer.h"
 #include "RealDiffRenderer.h"
 
 enum class DisplayMode
@@ -30,10 +31,12 @@ public:
 	void close();
 private:
 	void updateTitle(glm::vec3 color);
+	void updateTitle(glm::vec3 left, glm::vec3 right);
 	Window m_wnd;
 	std::optional<GBufferRenderer> m_gbuffer;
 	AttributeRenderer m_attribRenderer;
 	RealDiffRenderer m_refDiff;
+	RayDiffRenderer m_rayDiff;
 	Attribute m_attrib;
 	Pixels<glm::vec3> m_pixels;
 	DisplayMode m_mode;
