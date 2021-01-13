@@ -9,6 +9,12 @@
 #include "GBufferRenderer.h"
 #include "RealDiffRenderer.h"
 
+enum class DisplayMode
+{
+	Reference,
+	Diff
+};
+
 class App final : public script::ScriptObject
 {
 	App();
@@ -29,4 +35,6 @@ private:
 	AttributeRenderer m_attribRenderer;
 	RealDiffRenderer m_refDiff;
 	Attribute m_attrib;
+	Pixels<glm::vec3> m_pixels;
+	DisplayMode m_mode;
 };

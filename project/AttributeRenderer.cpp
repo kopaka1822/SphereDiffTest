@@ -2,10 +2,7 @@
 
 void AttributeRenderer::update(const Pixels<GBuffer>& src, Attribute attrib)
 {
-	if(src.getWidth() != m_pixels.getWidth() || src.getHeight() != m_pixels.getHeight())
-	{
-		m_pixels = Pixels<glm::vec3>(src.getWidth(), src.getHeight());
-	}
+	m_pixels.resize(src.getWidth(), src.getHeight());
 
 	auto s = src.begin();
 	auto d = m_pixels.begin();

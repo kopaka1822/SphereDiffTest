@@ -8,6 +8,18 @@ m_cam(glm::vec3(0.0f))
 	m_wnd.setKeyDownCallback([this](Window::Key key)
 	{
 		m_cam.onKey(key, true);
+
+		switch (key)
+		{
+		case Window::Key::KP_ADD:
+		case Window::Key::RIGHT_BRACKET: // + for me...
+			m_wnd.setColorScale(m_wnd.getColorScale() * 2.0f);
+			break;
+		case Window::Key::KP_SUBTRACT:
+		case Window::Key::SLASH:
+			m_wnd.setColorScale(m_wnd.getColorScale() * 0.5f);
+			break;
+		}
 	});
 	m_wnd.setKeyUpCallback([this](Window::Key key)
 	{

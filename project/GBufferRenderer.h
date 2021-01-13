@@ -9,7 +9,7 @@
 
 struct MissData
 {
-	
+	bool operator==(const MissData& right) const { return true; }
 };
 
 struct GBuffer

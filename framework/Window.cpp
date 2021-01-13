@@ -147,9 +147,10 @@ void Window::initShader()
 	fragment.loadFromSource(R"(
 		#version 330 core
 		uniform sampler2D tex;
+		uniform float scale;
 		out vec4 fragColor;
 		void main() {
-			fragColor = texelFetch(tex, ivec2(gl_FragCoord.xy) / 8, 0);
+			fragColor = abs(texelFetch(tex, ivec2(gl_FragCoord.xy) / 8, 0)) * scale;
 	})");
 	assert(m_resScale == 8); // change value in shader if false!
 
@@ -157,6 +158,8 @@ void Window::initShader()
 	m_program->attach(vertex).attach(fragment).link();
 	m_program->bind();
 
+	m_scale = m_program->getUniform("scale", 1.0f);
+	
 	// generate empty vertex array object (to use glDrawArrays)
 	glGenVertexArrays(1, &m_vao);
 	glBindVertexArray(m_vao);
@@ -189,7 +192,7 @@ void Window::resize(size_t width, size_t height)
 	glGenTextures(1, &m_texture);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 	
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, GLsizei(getWidth()), GLsizei(getHeight()), 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16_SNORM, GLsizei(getWidth()), GLsizei(getHeight()), 0, GL_RGB, GL_SHORT, nullptr);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 

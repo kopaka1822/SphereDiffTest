@@ -4,7 +4,8 @@
 App::App()
 	:
 	m_wnd(160, 90, "RayDiff Tool"),
-	m_attrib(Attribute::Depth)
+	m_attrib(Attribute::Texcoord),
+	m_mode(DisplayMode::Diff)
 {
 	addFunction("close", script::Util::makeFunction(this, &App::close, "App::close()"));
 
@@ -25,11 +26,29 @@ bool App::run()
 	m_gbuffer->render();
 	m_attribRenderer.update(m_gbuffer->getPixels(), m_attrib);
 
-	const auto& pixels = m_attribRenderer.getPixels();
-	m_wnd.swapBuffer(pixels);
-	
-	auto curColor = pixels.get(int(m_wnd.getMouseX()), int(m_wnd.getMouseY()));
-	updateTitle(curColor);
+	const auto& attribPixels = m_attribRenderer.getPixels();
+
+	if(m_mode == DisplayMode::Reference)
+	{
+		m_wnd.swapBuffer(attribPixels);
+
+		auto curColor = attribPixels.get(int(m_wnd.getMouseX()), int(m_wnd.getMouseY()));
+		updateTitle(curColor);
+	}
+	else if(m_mode == DisplayMode::Diff)
+	{
+		m_pixels.resize(attribPixels.getWidth(), attribPixels.getHeight());
+		
+		Scissor s;
+		s.xstart = 0; s.ystart = 0;
+		s.xend = m_pixels.getWidth(); s.yend = m_pixels.getHeight();
+		m_refDiff.update(m_gbuffer->getPixels(), attribPixels, m_pixels, s);
+
+		m_wnd.swapBuffer(m_pixels);
+
+		auto curColor = m_pixels.get(int(m_wnd.getMouseX()), int(m_wnd.getMouseY()));
+		updateTitle(curColor);
+	}
 
 	return m_wnd.isOpen();
 }

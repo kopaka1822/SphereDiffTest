@@ -42,7 +42,7 @@ public:
 
 	T get(int x, int y) const
 	{
-		if (m_width == 0 || m_height == 0) return T(0);
+		if (m_width == 0 || m_height == 0) return T();
 		x = glm::clamp(x, 0, m_width - 1);
 		y = glm::clamp(y, 0, m_height - 1);
 		return m_pixels[y * m_width + x];
@@ -53,6 +53,13 @@ public:
 		assert(x >= 0); assert(x < m_width);
 		assert(y >= 0); assert(y < m_height);
 		m_pixels[y * m_width + x] = val;
+	}
+
+	void resize(int width, int height)
+	{
+		if (m_width == width && m_height == height) return;
+
+		*this = Pixels(width, height);
 	}
 	
 	void clear()

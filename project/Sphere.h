@@ -14,4 +14,9 @@ struct Sphere
 		uv[1] = glm::acos(n.y) / glm::pi<float>();
 		return uv;
 	}
+
+	bool operator==(const Sphere& right) const
+	{
+		return (C == right.C) && r == right.r;
+	}
 };

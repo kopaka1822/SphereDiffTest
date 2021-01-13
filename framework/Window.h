@@ -222,11 +222,12 @@ public:
 
 	/// \brief closes the window
 	void close();
-private:
 
-#ifdef WINDOW_PUT_PIXEL
+	void setColorScale(float s) { m_scale.set(s); }
+	float getColorScale() const { return m_scale.get(); }
+	
+private:
 	void initShader();
-#endif
 
 	void resize(size_t width, size_t height);
 private:
@@ -236,6 +237,7 @@ private:
 	size_t m_height = 0;
 	
 	std::unique_ptr<Program> m_program;
+	Uniform<float> m_scale;
 	uint32_t m_vao = 0;
 	uint32_t m_texture = 0;
 
