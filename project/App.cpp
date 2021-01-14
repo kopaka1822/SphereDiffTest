@@ -4,7 +4,7 @@
 App::App()
 	:
 	m_wnd(160, 90, "RayDiff Tool"),
-	m_attrib(Attribute::Position),
+	m_attrib(Attribute::Depth),
 	m_mode(DisplayMode::Diff)
 {
 	addFunction("close", script::Util::makeFunction(this, &App::close, "App::close()"));
